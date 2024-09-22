@@ -57,7 +57,7 @@ class model_backend(InferenceModel):
         self.kcpp_ropebase = 10000.0
         self.kcpp_useclblast = None
         self.kcpp_usecublas = None
-        self.kcpp_noblas = False
+        self.kcpp_usecpu = False
         self.kcpp_noavx2 = False
         self.kcpp_nommap = False
         self.kcpp_usevulkan = None
@@ -97,9 +97,9 @@ class model_backend(InferenceModel):
                                     "menu_path": "",
                                     "refresh_model_inputs": False,
                                     "extra_classes": "",
-                                    'children': [{'text': 'Use No BLAS', 'value': 0}, {'text': 'Use OpenBLAS', 'value': 1}, {'text': 'Use CuBLAS', 'value': 2},
-                                    {'text': 'Use CLBLast GPU #1', 'value': 3},{'text': 'Use CLBLast GPU #2', 'value': 4},{'text': 'Use CLBLast GPU #3', 'value': 5}
-                                    ,{'text': 'NoAVX2 Mode (Old CPU)', 'value': 6},{'text': 'Failsafe Mode (Old CPU)', 'value': 7},{'text': 'Use Vulkan GPU #1', 'value': 8},{'text': 'Use Vulkan GPU #2', 'value': 9}],
+                                    'children': [{'text': 'Use No BLAS', 'value': 0}, {'text': 'Use CuBLAS', 'value': 1},
+                                    {'text': 'Use CLBLast GPU #1', 'value': 2},{'text': 'Use CLBLast GPU #2', 'value': 3},{'text': 'Use CLBLast GPU #3', 'value': 4}
+                                    ,{'text': 'NoAVX2 Mode (Old CPU)', 'value': 5},{'text': 'Failsafe Mode (Old CPU)', 'value': 6},{'text': 'Use Vulkan GPU #1', 'value': 7},{'text': 'Use Vulkan GPU #2', 'value': 8}],
                                     })
         requested_parameters.append({
                                     "uitype": "text",
@@ -236,26 +236,24 @@ class model_backend(InferenceModel):
 
         accel = parameters["kcpp_accelerator"]
         if accel==0:
-            self.kcpp_noblas = True
+            self.kcpp_usecpu = True
         elif accel==1:
-           pass
-        elif accel==2:
             self.kcpp_usecublas = ["normal"]
-        elif accel==3:
+        elif accel==2:
             self.kcpp_useclblast = [0,0]
-        elif accel==4:
+        elif accel==3:
             self.kcpp_useclblast = [1,0]
-        elif accel==5:
+        elif accel==4:
             self.kcpp_useclblast = [0,1]
+        elif accel==5:
+            self.kcpp_noavx2 = True
         elif accel==6:
             self.kcpp_noavx2 = True
-        elif accel==7:
-            self.kcpp_noavx2 = True
-            self.kcpp_noblas = True
+            self.kcpp_usecpu = True
             self.kcpp_nommap = True
-        elif accel==8:
+        elif accel==7:
             self.kcpp_usevulkan = [0]
-        elif accel==9:
+        elif accel==8:
             self.kcpp_usevulkan = [1]
         pass
 
@@ -270,7 +268,7 @@ class model_backend(InferenceModel):
         port=5001, port_param=5001, host='', launch=False, lora=None, threads=self.kcpp_threads, blasthreads=self.kcpp_threads,
         psutil_set_threads=False, highpriority=False, contextsize=self.kcpp_ctxsize, blasbatchsize=self.kcpp_blasbatchsize,
         ropeconfig=[self.kcpp_ropescale, self.kcpp_ropebase], stream=False, smartcontext=self.kcpp_smartcontext, forceversion=0,
-        nommap=self.kcpp_nommap, usemlock=False, noavx2=self.kcpp_noavx2, debugmode=self.kcpp_debugmode, skiplauncher=True, noblas=self.kcpp_noblas,
+        nommap=self.kcpp_nommap, usemlock=False, noavx2=self.kcpp_noavx2, debugmode=self.kcpp_debugmode, skiplauncher=True, usecpu=self.kcpp_usecpu,
         useclblast=self.kcpp_useclblast, usecublas=self.kcpp_usecublas, usevulkan=self.kcpp_usevulkan, gpulayers=self.kcpp_gpulayers,
         tensor_split=self.kcpp_tensor_split, config=None, onready='', multiuser=False, foreground=False, preloadstory=None, noshift=False,
         remotetunnel=False, ssl=False, benchmark=None, nocertify=False, mmproj=None, password=None, chatcompletionsadapter=None)
