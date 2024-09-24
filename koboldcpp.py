@@ -4486,12 +4486,12 @@ def main(launch_args,start_server=True):
 
     if args.gpulayers:
         shouldavoidgpu = False
-        if args.usecpu and sys.platform!="darwin":
-            shouldavoidgpu = True
-            if args.gpulayers and args.gpulayers>0:
-                print("WARNING: GPU layers is set, but a GPU backend was not selected! GPU will not be used!")
-            args.gpulayers = 0
-        elif args.gpulayers==-1 and sys.platform=="darwin" and args.model_param and os.path.exists(args.model_param):
+        # if args.usecpu and sys.platform!="darwin":
+            # shouldavoidgpu = True
+            # if args.gpulayers and args.gpulayers>0:
+                # print("WARNING: GPU layers is set, but a GPU backend was not selected! GPU will not be used!")
+            # args.gpulayers = 0
+        if args.gpulayers==-1 and sys.platform=="darwin" and args.model_param and os.path.exists(args.model_param):
             print(f"MacOS detected: Auto GPU layers set to maximum")
             args.gpulayers = 200
         elif not shouldavoidgpu and args.model_param and os.path.exists(args.model_param):
