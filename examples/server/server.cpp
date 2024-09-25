@@ -2357,6 +2357,10 @@ int main(int argc, char ** argv) {
         svr.reset(new httplib::Server());
     }
 #else
+    if (params.ssl_file_key != "" && params.ssl_file_cert != "") {
+        LOG_ERR("Server is built without SSL support\n");
+        return 1;
+    }
     svr.reset(new httplib::Server());
 #endif
 
@@ -3180,7 +3184,7 @@ int main(int argc, char ** argv) {
     }
 
     // print sample chat example to make it clear which template is used
-    LOG_INF("%s: chat template, built_in: %d, chat_example: '%s\n'", __func__, params.chat_template.empty(), llama_chat_format_example(ctx_server.model, params.chat_template).c_str());
+    LOG_INF("%s: chat template, built_in: %d, chat_example: '%s'\n", __func__, params.chat_template.empty(), llama_chat_format_example(ctx_server.model, params.chat_template).c_str());
 
     ctx_server.queue_tasks.on_new_task(std::bind(
                 &server_context::process_single_task, &ctx_server, std::placeholders::_1));
