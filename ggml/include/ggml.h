@@ -229,14 +229,20 @@
 #define GGML_MAX_PARAMS         2048
 #define GGML_MAX_CONTEXTS       64
 #define GGML_MAX_SRC            10
-#ifndef GGML_MAX_NAME
-#define GGML_MAX_NAME           128
-#define GGML_MAX_N_THREADS      512
 
-#endif
+// #ifndef GGML_MAX_NAME
+// #define GGML_MAX_NAME           128
+
+#define GGML_MAX_N_THREADS      512
 #define GGML_MAX_OP_PARAMS      64
+
+#ifndef GGML_MAX_NAME
+#   define GGML_MAX_NAME        64
+#endif
+
 #define GGML_DEFAULT_N_THREADS  4
 #define GGML_DEFAULT_GRAPH_SIZE 2048
+
 #if UINTPTR_MAX == 0xFFFFFFFF
     #define GGML_MEM_ALIGN 4
 #else
@@ -265,21 +271,21 @@
         } \
     } while (0)
 #ifndef NDEBUG
-#define GGML_UNREACHABLE() do { fprintf(stderr, "statement should be unreachable\n"); abort(); } while(0)
+#   define GGML_UNREACHABLE() do { fprintf(stderr, "statement should be unreachable\n"); abort(); } while(0)
 #elif defined(__GNUC__)
-#define GGML_UNREACHABLE() __builtin_unreachable()
+#   define GGML_UNREACHABLE() __builtin_unreachable()
 #elif defined(_MSC_VER)
-#define GGML_UNREACHABLE() __assume(0)
+#   define GGML_UNREACHABLE() __assume(0)
 #else
-#define GGML_UNREACHABLE() ((void) 0)
+#   define GGML_UNREACHABLE() ((void) 0)
 #endif
 
 #ifdef __cplusplus
-#define GGML_NORETURN [[noreturn]]
+#   define GGML_NORETURN [[noreturn]]
 #elif defined(_MSC_VER)
-#define GGML_NORETURN __declspec(noreturn)
+#   define GGML_NORETURN __declspec(noreturn)
 #else
-#define GGML_NORETURN _Noreturn
+#   define GGML_NORETURN _Noreturn
 #endif
 
 #define GGML_ABORT(...) ggml_abort(__FILE__, __LINE__, __VA_ARGS__)
@@ -2514,6 +2520,9 @@ extern "C" {
     GGML_API int ggml_cpu_has_matmul_int8(void);
     GGML_API int ggml_cpu_has_cann       (void);
     GGML_API int ggml_cpu_has_llamafile  (void);
+
+    // get the sve vector length in bytes
+    GGML_API int ggml_cpu_get_sve_cnt(void);
 
     //
     // Internal types and functions exposed for tests and benchmarks
