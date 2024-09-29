@@ -6247,16 +6247,6 @@ static void llm_load_vocab(
             const int n_merges = gguf_get_arr_n(ctx, merges_keyidx);
             for (int i = 0; i < n_merges; i++) {
                 const std::string word = gguf_get_arr_str(ctx, merges_keyidx, i);
-                if (!OldBPETokenizerMode)
-                {
-                    auto validcodepoints = unicode_cpts_from_utf8(word).size() > 0;
-                    GGML_ASSERT_CONTINUE(validcodepoints);
-                    if(!validcodepoints)
-                    {
-                        OldBPETokenizerMode = true;
-                        printf("\nFalling Back to older tokenizer...");
-                    }
-                }
 
                 std::string first;
                 std::string second;

@@ -1900,12 +1900,12 @@ ModelLoadResult gpttype_load_model(const load_model_inputs inputs, FileFormat in
         #endif
 
         //compat for old falcon
-        if(file_format_meta.fileversion==1)
-        {
+        // if(file_format_meta.fileversion==1)
+        // {
             //apply compat fix
-            printf("\nUsing older tokenizer for GGUFv1...");
-            OldBPETokenizerMode = true;
-        }
+            // printf("\nUsing older tokenizer for GGUFv1...");
+            // OldBPETokenizerMode = true;
+        // }
 
         llama_model * llamamodel = llama_load_model_from_file(kcpp_data->model_filename.c_str(), model_params);
         if(overwriteRope)

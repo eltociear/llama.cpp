@@ -1761,10 +1761,6 @@ static std::string llama_decode_text(const std::string & text) {
 
 // does not write null-terminator to buf
 int32_t llama_token_to_piece_impl(const struct llama_vocab & vocab, llama_token token, char * buf, int32_t length, int32_t lstrip, bool special) {
-    if(OldBPETokenizerMode)
-    {
-        return llama_token_to_piece_old(vocab, token, buf, length);
-    }
 
     // ref: https://github.com/ggerganov/llama.cpp/pull/7587#discussion_r1620983843
     static const int attr_special = LLAMA_TOKEN_ATTR_UNKNOWN | LLAMA_TOKEN_ATTR_CONTROL;
