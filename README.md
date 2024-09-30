@@ -213,7 +213,7 @@ Cuda 11.4.4/11.5 arch 35375052 : CuCML_ArCML_SMC2_DmmvX32Y1
 
 # koboldcpp-experimental
 
-KoboldCpp-experimental is a sligthly extended KoboldCpp with [custom](experimental/README.md) functionality.
+KoboldCpp-experimental is a slightly extended KoboldCpp with [custom](experimental/README.md) functionality.
 
 # koboldcpp
 
