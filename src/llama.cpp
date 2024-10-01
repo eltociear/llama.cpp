@@ -6496,6 +6496,13 @@ static void llm_load_vocab(
         if (word.empty()) {
             LLAMA_LOG_WARN("%s: empty token at index %u\n", __func__, i);
             word = "[EMPTY_" + std::to_string(i) + "]";
+
+       // if (!OldBPETokenizerMode)
+        // {
+            // if (word.empty()) {
+            // LLAMA_LOG_WARN("%s: empty token at index %u\n", __func__, i);
+            // word = "[EMPTY_" + std::to_string(i) + "]";
+        // }
         }
 
         vocab.token_to_id[word] = i;

@@ -3870,12 +3870,12 @@ struct ggml_context * ggml_init(struct ggml_init_params params) {
             GGML_PRINT_DEBUG("%s: g_state initialized in %f ms\n", __func__, (t_end - t_start)/1000.0f);
         }
 
-#if defined(GGML_USE_CLBLAST)
-        ggml_cl_init();
-#endif
-
 #if defined(__ARM_ARCH)
         ggml_init_arm_arch_features();
+#endif
+
+#if defined(GGML_USE_CLBLAST)
+        ggml_cl_init();
 #endif
 
         is_first_call = false;
