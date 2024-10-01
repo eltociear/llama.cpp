@@ -1273,13 +1273,13 @@ Current version indicated by LITEVER below.
 		.saveloadpopup {
 			width: 660px;
 			background-color: #262626;
-			margin-top: 80px;
+			margin-top: 60px;
 		}
 		@media (max-width: 768px) {
 			.saveloadpopup {
 				width: 100%;
 				background-color: #262626;
-				margin-top: 80px;
+				margin-top: 60px;
 			}
 		}
 		.saveloadgrid
@@ -4228,7 +4228,7 @@ Current version indicated by LITEVER below.
 	const OAI_TTS_ID = 1002;
 	const HD_RES_PX = 512;
 	const NO_HD_RES_PX = 320;
-	const SAVE_SLOTS = 8;
+	const SAVE_SLOTS = 10;
 
 	//all configurable globals
 	var perfdata = null; //if it's null, we are not connected
@@ -9150,9 +9150,9 @@ Current version indicated by LITEVER below.
 		let filetable = ``;
 
 		let entry = `<div style="display:flex">
-				<button type="button" style="font-size:12px; margin:2px;width:33%" name="localsave" class="btn btn-primary" onclick="hide_popups();save_file_button()">`+"💾<br>Download File"+`</button>
-				<button type="button" style="font-size:12px; margin:2px;width:33%" name="localload" class="btn btn-primary" onclick="hide_popups();load_file_button()">`+"📁<br>Open File"+`</button>
-				<button type="button" style="font-size:12px; margin:2px;width:34%" name="shareurl" class="btn btn-primary" onclick="hide_popups();share_story_button()">`+"🌐<br>Share"+`</button>
+				<button type="button" style="font-size:12px; margin:2px;width:33%" name="localsave" class="btn btn-primary" onclick="hide_popups();save_file_button()">`+"💾<br>Download File to avoid data-loss"+`</button>
+				<button type="button" style="font-size:12px; margin:2px;width:33%" name="localload" class="btn btn-primary" onclick="hide_popups();load_file_button()">`+"📁<br>Open File from storage location"+`</button>
+				<button type="button" style="font-size:12px; margin:2px;width:34%" name="shareurl" class="btn btn-primary" onclick="hide_popups();share_story_button()">`+"🌐<br>Import / Export / Share Story"+`</button>
 				</div>
 				<div style="margin-top:0px; text-align: center; align-self: center; width: calc(100% - 184px);">
 				</div>`;
@@ -17683,7 +17683,7 @@ Current version indicated by LITEVER below.
 								</li>
 								<li class="nav-item hidden" id="topbtn_settings">
 									<a class="nav-link mainnav" href="#" id="btn_settings"
-										onclick="closeTopNav();display_settings()">Settings</a>
+										onclick="closeTopNav();display_settings()">KLite / KCPP / CCPP Settings</a>
 								</li>
 
 							</ul>
@@ -17865,7 +17865,7 @@ Current version indicated by LITEVER below.
 			<div style="overflow: auto;">
 				<div id="saveloadentries" class="justifyleft anotelabel saveloadgrid">
 				</div>
-				<div class="justifyleft anotelabel"><p style="padding:0px;font-size: 8px;" class="color_red">CAUTION: CHATS ARE SAVED TO A TEMPOARY CACHE AND CAN BE DELETED BY YOUR BROWSER. TO AVOID LOSING DATA, USE THE DOWNLOAD FILE BUTTON.</p></div>
+				<!-- <div class="justifyleft anotelabel"><p style="padding:0px;font-size: 8px;" class="color_red">CAUTION: CHATS ARE SAVED TO A TEMPOARY CACHE AND CAN BE DELETED BY YOUR BROWSER. TO AVOID LOSING DATA, USE THE DOWNLOAD FILE BUTTON.</p></div> -->
 				<div class="popupfooter">
 					<button type="button" class="btn btn-primary" id=""
 						onclick="hide_popups()">Back</button>
@@ -18224,7 +18224,7 @@ Current version indicated by LITEVER below.
 		<div class="popupbg flex"></div>
 		<div class="nspopup flexsize" style="margin-top: 4vh; background-color:#102840">
 			<div class="popuptitlebar">
-				<div class="popuptitletext" title="Settings Menu">Settings</div>
+				<div class="popuptitletext" title="Settings Menu">Kobold Lite / KoboldCPP / Croco.CPP Settings</div>
 			</div>
 			<div><ul class="nav nav-tabs settingsnav">
 				<li id="settingsmenuformat_tab" class="active"><a class="" href="#" title="Open Format Menu" onclick="display_settings_tab(0)">Format</a></li>
